@@ -1,0 +1,167 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Proyecto de grado\\Senalandia\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\views\\tutor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\views\\tutor\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\views\\estudiante\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\views\\estudiante\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\models\\roles\\tutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\models\\roles\\tutor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\controllers\\tutorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\controllers\\tutorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\controllers\\estudiantecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\controllers\\estudiantecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|d:\\proyecto de grado\\senalandia\\senalandia\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7DE002B6-8F37-48D0-AFB0-C6EA91559110}|Senalandia\\Senalandia.csproj|solutionrelative:senalandia\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Senalandia\\Views\\Home\\Index.cshtml",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Senalandia\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAJwAAAAAAAAAAAAAwL0AAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-30T15:01:37.243Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\appsettings.json",
+              "RelativeDocumentMoniker": "Senalandia\\appsettings.json",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\appsettings.json",
+              "RelativeToolTip": "Senalandia\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-02T11:52:40.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Tutor.cs",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Models\\Roles\\Tutor.cs",
+              "RelativeDocumentMoniker": "Senalandia\\Models\\Roles\\Tutor.cs",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Models\\Roles\\Tutor.cs",
+              "RelativeToolTip": "Senalandia\\Models\\Roles\\Tutor.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T16:59:59.63Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TutorController.cs",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\TutorController.cs",
+              "RelativeDocumentMoniker": "Senalandia\\Controllers\\TutorController.cs",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\TutorController.cs",
+              "RelativeToolTip": "Senalandia\\Controllers\\TutorController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T16:55:12.295Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EstudianteController.cs",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\EstudianteController.cs",
+              "RelativeDocumentMoniker": "Senalandia\\Controllers\\EstudianteController.cs",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\EstudianteController.cs",
+              "RelativeToolTip": "Senalandia\\Controllers\\EstudianteController.cs",
+              "ViewState": "AQIAAGgAAAAAAAAAAAAQwHoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T16:32:27.03Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Senalandia\\Controllers\\AdminController.cs",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Senalandia\\Controllers\\AdminController.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAQwBIAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T15:51:43.991Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Senalandia\\Controllers\\HomeController.cs",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Senalandia\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAADwvx4AAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-30T15:10:41.148Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Tutor\\Index.cshtml",
+              "RelativeDocumentMoniker": "Senalandia\\Views\\Tutor\\Index.cshtml",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Tutor\\Index.cshtml",
+              "RelativeToolTip": "Senalandia\\Views\\Tutor\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-30T15:10:10.859Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Estudiante\\Index.cshtml",
+              "RelativeDocumentMoniker": "Senalandia\\Views\\Estudiante\\Index.cshtml",
+              "ToolTip": "D:\\Proyecto de grado\\Senalandia\\Senalandia\\Views\\Estudiante\\Index.cshtml",
+              "RelativeToolTip": "Senalandia\\Views\\Estudiante\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-30T15:06:01.283Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

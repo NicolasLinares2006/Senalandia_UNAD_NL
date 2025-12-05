@@ -1,0 +1,841 @@
+﻿@model Senalandia.Models.Roles.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Panel de Administración";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Señalandia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --bg-light: #F5F7FA;
+            --text-dark: #2C3E50;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Header */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .header-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .btn-menu, .btn-info-icon {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            padding: 5px;
+        }
+
+        .btn-info-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--text-dark);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Stats Cards */
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stats-title {
+            color: #6c757d;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .stats-icon {
+            color: #adb5bd;
+            font-size: 1.3rem;
+        }
+
+        .stats-value {
+            color: var(--text-dark);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .stats-subtitle {
+            color: #6c757d;
+            font-size: 0.85rem;
+        }
+
+        .stats-change {
+            color: #28a745;
+            font-size: 0.85rem;
+        }
+
+        /* Tabs */
+        .custom-tabs {
+            background: transparent;
+            border: none;
+            margin: 30px 0 20px;
+        }
+
+        .custom-tabs .nav-link {
+            color: #6c757d;
+            background: #E8ECEF;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 25px;
+            margin-right: 10px;
+            font-weight: 500;
+        }
+
+        .custom-tabs .nav-link.active {
+            color: var(--text-dark);
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Section Header */
+        .section-header {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0 0 5px 0;
+        }
+
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Module Cards */
+        .module-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 10px;
+        }
+
+        .module-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .module-meta {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .badge-active {
+            background: var(--primary-blue);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-inactive {
+            background: #dc3545;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .btn-more {
+            background: #f8f9fa;
+            border: none;
+            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        /* Dropdown Menu */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 8px;
+        }
+
+        .dropdown-item {
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-item.text-danger:hover {
+            background: #fff5f5;
+        }
+
+        /* Letter/Card Items */
+        .card-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .card-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .card-item-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-item-description {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Buttons */
+        .btn-primary-custom {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-custom:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            padding: 0;
+            margin-right: 15px;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 25px 30px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(74, 144, 226, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #f0f0f0;
+            padding: 20px 30px;
+        }
+
+        .btn-secondary-custom {
+            background: #e9ecef;
+            color: var(--text-dark);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .btn-secondary-custom:hover {
+            background: #dee2e6;
+        }
+
+        .page-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        media (max-width: 768px) {
+            .stats-value {
+                font-size: 2rem;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="#" class="logo" onclick="showDashboard(); return false;">
+                    <div class="logo-icon">
+                        <i class="bi bi-hand-index"></i>
+                    </div>
+                    <span>Señalandia</span>
+                </a>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="header-title">Panel de Administración</span>
+                    <button class="btn-info-icon">
+                        <i class="bi bi-info"></i>
+                    </button>
+                    <button class="btn-menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard View -->
+    <div id="dashboardView" class="container-fluid px-4 py-4">
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Total de Usuarios</span>
+                        <i class="bi bi-people stats-icon"></i>
+                    </div>
+                    <div class="stats-value">@Model.TotalUsuarios</div>
+                    <div class="stats-change">Estudiantes registrados</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Módulos Activos</span>
+                        <i class="bi bi-journal-text stats-icon"></i>
+                    </div>
+                    <div class="stats-value">@Model.ModulosActivos</div>
+                    <div class="stats-subtitle">@Model.ModulosTotales módulos totales</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Módulo más Usado</span>
+                        <i class="bi bi-activity stats-icon"></i>
+                    </div>
+                    <div class="stats-value">@Model.ModuloMasUsado</div>
+                    <div class="stats-subtitle">Más completado</div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <span class="stats-title">Tasa de Completación</span>
+                        <i class="bi bi-graph-up stats-icon"></i>
+                    </div>
+                    <div class="stats-value">@Model.TasaCompletacion</div>
+                    <div class="stats-subtitle">Promedio de lecciones completadas</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav custom-tabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#modulesTab">
+                    Gestión de Módulos
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#usersTab">
+                    Gestión de Usuarios
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Modules Tab -->
+            <div class="tab-pane fade show active" id="modulesTab">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Módulos Educativos</h2>
+                        <p class="section-subtitle">Crea, edita y organiza los módulos de aprendizaje de la plataforma.</p>
+                    </div>
+                    <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#addModuleModal">
+                        <i class="bi bi-plus-circle"></i> Agregar Módulo
+                    </button>
+                </div>
+
+                <!-- Module Cards -->
+                <div class="row">
+                    @foreach (var modulo in Model.Modulos)
+                    {
+                        <div class="col-lg-6 col-xl-4">
+                            <div class="module-card">
+                                <div class="module-header">
+                                    <div>
+                                        <h3 class="module-title">@modulo.Titulo</h3>
+                                        <p class="module-meta">Tarjetas: @modulo.CantidadTarjetas</p>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        @if (modulo.Estado == "activo")
+                                        {
+                                            <span class="badge-active">Activo</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge-inactive">Inactivo</span>
+                                        }
+                                        <div class="dropdown">
+                                            <button class="btn-more" data-bs-toggle="dropdown">
+                                                <i class="bi bi-three-dots"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                <li><a class="dropdown-item" href="#">Editar</a></li>
+                                                <li><a class="dropdown-item" href="#" onclick="showCards(event, @modulo.IdModulo, '@modulo.Titulo', @modulo.CantidadTarjetas)">Ver Tarjetas</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item text-danger" href="#" onclick="eliminarModulo(@modulo.IdModulo); return false;">Eliminar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Users Tab -->
+            <div class="tab-pane fade" id="usersTab">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title">Gestión de Usuarios</h2>
+                        <p class="section-subtitle">Administra los usuarios de la plataforma.</p>
+                    </div>
+                </div>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> Esta sección estará disponible próximamente.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards View -->
+    <div id="cardsView" class="container-fluid px-4 py-4" style="display: none;">
+        <div class="section-header">
+            <div class="d-flex align-items-center">
+                <button class="btn-back" onclick="showDashboard()">
+                    <i class="bi bi-arrow-left"></i>
+                </button>
+                <div>
+                    <h2 class="section-title" id="cardsModuleTitle">Tarjetas</h2>
+                    <p class="section-subtitle" id="cardsModuleSubtitle">Administra el contenido de este módulo.</p>
+                </div>
+            </div>
+            <button class="btn-primary-custom" data-bs-toggle="modal" data-bs-target="#addCardModal">
+                <i class="bi bi-plus-circle"></i> Agregar Tarjeta
+            </button>
+        </div>
+
+        <!-- Card Items Container -->
+        <div class="row" id="tarjetasContainer">
+            <!-- Las tarjetas se cargarán dinámicamente -->
+        </div>
+    </div>
+
+    <!-- Add Module Modal -->
+    <div class="modal fade" id="addModuleModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Nuevo Módulo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Título</label>
+                        <input type="text" id="moduloTitulo" class="form-control" placeholder="Nombre del módulo">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea id="moduloDescripcion" class="form-control" placeholder="Descripción del módulo"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Estado</label>
+                        <select id="moduloEstado" class="form-select">
+                            <option value="inactivo">Inactivo</option>
+                            <option value="activo">Activo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary-custom" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn-primary-custom" onclick="crearModulo()">Crear Módulo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div class="modal fade" id="addCardModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Nueva Tarjeta</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Título</label>
+                        <input type="text" id="tarjetaTitulo" class="form-control" placeholder="Título de la tarjeta">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Descripción</label>
+                        <textarea id="tarjetaDescripcion" class="form-control" placeholder="Descripción de la tarjeta"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">URL de Imagen</label>
+                        <input type="text" id="tarjetaImagenUrl" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">URL de Video (opcional)</label>
+                        <input type="text" id="tarjetaVideoUrl" class="form-control" placeholder="https://ejemplo.com/video.mp4">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Puntos</label>
+                        <input type="number" id="tarjetaPuntos" class="form-control" value="10" min="1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary-custom" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn-primary-custom" onclick="crearTarjeta()">Crear Tarjeta</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentModuloId = null;
+
+        function showCards(event, moduloId, moduloNombre, cardCount) {
+            event.preventDefault();
+            currentModuloId = moduloId;
+
+            document.getElementById('dashboardView').style.display = 'none';
+            document.getElementById('cardsView').style.display = 'block';
+            document.getElementById('cardsModuleTitle').textContent = `Tarjetas de "${moduloNombre}"`;
+            document.getElementById('cardsModuleSubtitle').textContent = `Administra el contenido de este módulo. Actualmente hay ${cardCount} tarjeta(s).`;
+
+            // Cargar tarjetas del módulo
+            cargarTarjetas(moduloId);
+            window.scrollTo(0, 0);
+        }
+
+        function showDashboard() {
+            document.getElementById('cardsView').style.display = 'none';
+            document.getElementById('dashboardView').style.display = 'block';
+            currentModuloId = null;
+            window.scrollTo(0, 0);
+        }
+
+        function cargarTarjetas(moduloId) {
+            fetch(`@Url.Action("ObtenerTarjetas", "Admin")?idModulo=${moduloId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('tarjetasContainer');
+
+                    if (data.length === 0) {
+                        container.innerHTML = `
+                                    <div class="col-12">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle"></i> No hay tarjetas en este módulo. ¡Crea la primera!
+                                        </div>
+                                    </div>
+                                `;
+                        return;
+                    }
+
+                    container.innerHTML = data.map(tarjeta => `
+                                <div class="col-lg-6">
+                                    <div class="card-item">
+                                        <div class="card-item-header">
+                                            <h3 class="card-item-title">${tarjeta.titulo}</h3>
+                                            <div class="dropdown">
+                                                <button class="btn-more" data-bs-toggle="dropdown">
+                                                    <i class="bi bi-three-dots"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a class="dropdown-item" href="#">Editar</a></li>
+                                                    <li><hr class="dropdown-divider"></li>
+                                                    <li><a class="dropdown-item text-danger" href="#" onclick="eliminarTarjeta(${tarjeta.idTarjeta}); return false;">Eliminar</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        ${tarjeta.imagenUrl ?
+                            `<img src="${tarjeta.imagenUrl}" alt="${tarjeta.titulo}" class="card-item-image">` :
+                            `<div class="card-item-image bg-secondary d-flex align-items-center justify-content-center" style="min-height: 200px;">
+                                                <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                                            </div>`
+                        }
+                                        <p class="card-item-description">${tarjeta.descripcion || ''}</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <small class="text-muted">Puntos: ${tarjeta.puntos}</small>
+                                            ${tarjeta.videoUrl ? '<small class="text-primary"><i class="bi bi-play-circle"></i> Con video</small>' : ''}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar las tarjetas');
+                });
+        }
+
+        function crearModulo() {
+            const titulo = document.getElementById('moduloTitulo').value;
+            const descripcion = document.getElementById('moduloDescripcion').value;
+            const estado = document.getElementById('moduloEstado').value;
+
+            fetch('@Url.Action("CrearModulo", "Admin")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    estado: estado
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Módulo creado exitosamente');
+                        location.reload();
+                    } else {
+                        alert('Error al crear el módulo: ' + data.mensaje);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al crear el módulo');
+                });
+        }
+
+        function crearTarjeta() {
+            if (!currentModuloId) {
+                alert('Error: No se ha seleccionado un módulo');
+                return;
+            }
+
+            const titulo = document.getElementById('tarjetaTitulo').value;
+            const descripcion = document.getElementById('tarjetaDescripcion').value;
+            const imagenUrl = document.getElementById('tarjetaImagenUrl').value;
+            const videoUrl = document.getElementById('tarjetaVideoUrl').value;
+            const puntos = document.getElementById('tarjetaPuntos').value;
+
+            fetch('@Url.Action("CrearTarjeta", "Admin")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    idModulo: currentModuloId,
+                    titulo: titulo,
+                    descripcion: descripcion,
+                    imagenUrl: imagenUrl,
+                    videoUrl: videoUrl,
+                    puntos: parseInt(puntos)
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Tarjeta creada exitosamente');
+                        location.reload();
+                    } else {
+                        alert('Error al crear la tarjeta: ' + data.mensaje);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al crear la tarjeta');
+                });
+        }
+
+        function eliminarModulo(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar este módulo?')) {
+                fetch(`@Url.Action("EliminarModulo", "Admin")?id=${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Módulo eliminado exitosamente');
+                            location.reload();
+                        } else {
+                            alert('Error al eliminar el módulo: ' + data.mensaje);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al eliminar el módulo');
+                    });
+            }
+        }
+
+        function eliminarTarjeta(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar esta tarjeta?')) {
+                fetch(`@Url.Action("EliminarTarjeta", "Admin")?id=${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Tarjeta eliminada exitosamente');
+                            cargarTarjetas(currentModuloId);
+                        } else {
+                            alert('Error al eliminar la tarjeta: ' + data.mensaje);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al eliminar la tarjeta');
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

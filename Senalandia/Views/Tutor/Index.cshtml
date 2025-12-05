@@ -1,0 +1,915 @@
+﻿@model Senalandia.Models.Roles.TutorDashboardViewModel
+
+@{
+    ViewData["Title"] = "Portal del Tutor";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal del Tutor - Señalandia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --bg-light: #F5F7FA;
+            --text-dark: #2C3E50;
+            --border-color: #E0E0E0;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Header */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            color: var(--text-dark);
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .header-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .btn-menu, .btn-info-icon {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .btn-info-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--text-dark);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Page Header */
+        .page-header {
+            padding: 40px 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .btn-notifications {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-notifications:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        /* Students Section */
+        .students-section {
+            background: white;
+            border-radius: 15px;
+            padding: 35px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0 0 5px 0;
+        }
+
+        .section-subtitle {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Table */
+        .students-table {
+            width: 100%;
+        }
+
+        .students-table thead {
+            background: #F8F9FA;
+        }
+
+        .students-table thead th {
+            padding: 15px 20px;
+            font-weight: 600;
+            color: #6c757d;
+            font-size: 0.9rem;
+            border: none;
+            text-transform: none;
+        }
+
+        .students-table tbody td {
+            padding: 20px;
+            vertical-align: middle;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .students-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .student-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .level-badge {
+            background: var(--primary-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress {
+            flex: 1;
+            height: 8px;
+            border-radius: 10px;
+            background: #E8F0F8;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-blue), #5DADE2);
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 45px;
+        }
+
+        .last-activity {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .badge-inactive {
+            background: #dc3545;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .btn-view-report {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .btn-view-report:hover {
+            gap: 12px;
+            color: #3a7bc8;
+        }
+
+        /* Report Page */
+        .report-header {
+            padding: 40px 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .student-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .student-header-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .student-header-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 5px 0;
+        }
+
+        .report-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-observation {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-observation:hover {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .btn-generate-pdf {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-generate-pdf:hover {
+            background: #3a7bc8;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Cards */
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .stat-icon {
+            color: #adb5bd;
+            font-size: 1.5rem;
+        }
+
+        .stat-value {
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+
+        .stat-card.progress-card {
+            flex: 2;
+        }
+
+        .progress-label-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .progress-large {
+            height: 12px;
+            border-radius: 10px;
+            background: #E8F0F8;
+        }
+
+        /* Chart Cards */
+        .chart-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+        }
+
+        .chart-subtitle {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .chart-placeholder {
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 10px;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Donut Chart */
+        .donut-chart {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .donut-chart svg {
+            transform: rotate(-90deg);
+        }
+
+        @@media (max-width: 768px) {
+            .page-header, .report-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .stats-row {
+                flex-direction: column;
+            }
+
+            .report-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn-observation, .btn-generate-pdf {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <a href="#" class="logo" onclick="showDashboard(); return false;">
+                    <div class="logo-icon">
+                        <i class="bi bi-hand-index"></i>
+                    </div>
+                    <span>Señalandia</span>
+                </a>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="header-title">Portal del Tutor</span>
+                    <button class="btn-info-icon">
+                        <i class="bi bi-info"></i>
+                    </button>
+                    <button class="btn-menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard View -->
+    <div id="dashboardView" class="container-fluid px-4">
+        <div class="page-header">
+            <h1 class="page-title">Panel de Estudiantes</h1>
+            <button class="btn-notifications">
+                <i class="bi bi-bell"></i> Ver Notificaciones
+            </button>
+        </div>
+
+        <div class="students-section">
+            <div class="section-header">
+                <h2 class="section-title">Progreso de Estudiantes</h2>
+                <p class="section-subtitle">Un resumen del progreso de tus estudiantes asignados (@Model.Estudiantes.Count).</p>
+            </div>
+
+            @if (Model.Estudiantes.Any())
+            {
+                <table class="students-table">
+                    <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Nivel</th>
+                            <th>Progreso del Nivel</th>
+                            <th>Última Actividad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var estudiante in Model.Estudiantes)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="student-info">
+                                        <img src="@estudiante.AvatarUrl" alt="@estudiante.NombreCompleto" class="student-avatar">
+                                        <span class="student-name">@estudiante.NombreCompleto</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="level-badge">Nivel @estudiante.NivelActual</span>
+                                </td>
+                                <td>
+                                    <div class="progress-container">
+                                        <div class="progress" style="width: 200px;">
+                                            <div class="progress-bar" role="progressbar" style="width: @estudiante.PorcentajeProgreso%"></div>
+                                        </div>
+                                        <span class="progress-text">@estudiante.PorcentajeProgreso%</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="last-activity">@estudiante.UltimaActividad</span>
+                                    @if (estudiante.EstadoActividad == "inactivo")
+                                    {
+                                        <span class="badge-inactive">Inactivo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="#" class="btn-view-report" onclick="showReport(@estudiante.IdEstudiante); return false;">
+                                        Ver Reporte <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No tienes estudiantes asignados actualmente.
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Report View -->
+    <div id="reportView" class="container-fluid px-4" style="display: none;">
+        <div class="report-header">
+            <div class="student-header">
+                <img src="" alt="" class="student-header-avatar" id="reportAvatar">
+                <div>
+                    <h1 class="student-header-name" id="reportName">Estudiante</h1>
+                    <span class="level-badge" id="reportLevel">Nivel</span>
+                </div>
+            </div>
+            <div class="report-actions">
+                <button class="btn-observation" data-bs-toggle="modal" data-bs-target="#observacionModal">
+                    <i class="bi bi-chat-left-text"></i> Agregar Observación
+                </button>
+                <button class="btn-generate-pdf" onclick="generarPDF()">
+                    <i class="bi bi-file-earmark-pdf"></i> Generar Reporte PDF
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Tiempo Total</span>
+                    <i class="bi bi-clock stat-icon"></i>
+                </div>
+                <div class="stat-value" id="reportTiempoTotal">0h 0m</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="stat-label">Lecciones Completadas</span>
+                    <i class="bi bi-check-circle stat-icon"></i>
+                </div>
+                <div class="stat-value" id="reportLecciones">0</div>
+            </div>
+
+            <div class="stat-card progress-card">
+                <div class="stat-header">
+                    <span class="stat-label" id="reportNivelLabel">Progreso Nivel</span>
+                </div>
+                <div class="progress-large">
+                    <div class="progress-bar" role="progressbar" style="width: 0%" id="reportProgressBar"></div>
+                </div>
+                <div class="progress-label-text" id="reportProgressText">0% para siguiente nivel</div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="chart-card">
+                    <h3 class="chart-title">Actividad Reciente</h3>
+                    <p class="chart-subtitle">Línea de tiempo de la actividad del estudiante (últimos 7 días).</p>
+                    <div class="chart-placeholder">
+                        <canvas id="activityChart" width="600" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="chart-card">
+                    <h3 class="chart-title">Módulos Completados</h3>
+                    <p class="chart-subtitle">Distribución de lecciones por módulo.</p>
+                    <div class="chart-placeholder">
+                        <canvas id="modulesChart" width="250" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Observaciones -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="chart-card">
+                    <h3 class="chart-title">Observaciones Recientes</h3>
+                    <div id="observacionesContainer">
+                        <!-- Se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4 mb-5">
+            <button class="btn-observation" onclick="showDashboard()">
+                <i class="bi bi-arrow-left"></i> Volver al Panel
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Observación -->
+    <div class="modal fade" id="observacionModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Agregar Observación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Observación</label>
+                        <textarea id="observacionTexto" class="form-control" rows="5" placeholder="Escribe aquí tus observaciones sobre el progreso del estudiante..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarObservacion()">Guardar Observación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script>
+        const idTutor = @Model.IdTutor;
+        let currentEstudianteId = null;
+        let activityChart = null;
+        let modulesChart = null;
+
+        function showReport(idEstudiante) {
+            currentEstudianteId = idEstudiante;
+            document.getElementById('dashboardView').style.display = 'none';
+            document.getElementById('reportView').style.display = 'block';
+
+            // Cargar datos del reporte
+            cargarReporteEstudiante(idEstudiante);
+            window.scrollTo(0, 0);
+        }
+
+        function showDashboard() {
+            document.getElementById('reportView').style.display = 'none';
+            document.getElementById('dashboardView').style.display = 'block';
+            currentEstudianteId = null;
+            window.scrollTo(0, 0);
+
+            // Destruir gráficos
+            if (activityChart) {
+                activityChart.destroy();
+                activityChart = null;
+            }
+            if (modulesChart) {
+                modulesChart.destroy();
+                modulesChart = null;
+            }
+        }
+
+        function cargarReporteEstudiante(idEstudiante) {
+            fetch(`@Url.Action("ObtenerReporteEstudiante", "Tutor")?idEstudiante=${idEstudiante}&idTutor=${idTutor}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Actualizar información del estudiante
+                    document.getElementById('reportAvatar').src = data.estudiante.avatarUrl;
+                    document.getElementById('reportAvatar').alt = data.estudiante.nombreCompleto;
+                    document.getElementById('reportName').textContent = data.estudiante.nombreCompleto;
+                    document.getElementById('reportLevel').textContent = `Nivel ${data.estudiante.nivelActual} - ${data.estudiante.nombreNivel}`;
+
+                    // Actualizar estadísticas
+                    document.getElementById('reportTiempoTotal').textContent = data.estudiante.tiempoTotal;
+                    document.getElementById('reportLecciones').textContent = data.estudiante.leccionesCompletadas;
+                    document.getElementById('reportNivelLabel').textContent = `Progreso Nivel ${data.estudiante.nivelActual}`;
+                    document.getElementById('reportProgressBar').style.width = data.estudiante.porcentajeProgreso + '%';
+                    document.getElementById('reportProgressText').textContent = `${data.estudiante.porcentajeProgreso}% para Nivel ${data.estudiante.nivelActual + 1}`;
+
+                    // Crear gráfico de actividad
+                    crearGraficoActividad(data.actividadDiaria);
+
+                    // Crear gráfico de módulos
+                    crearGraficoModulos(data.modulosCompletados);
+
+                    // Mostrar observaciones
+                    mostrarObservaciones(data.observaciones);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar el reporte del estudiante');
+                });
+        }
+
+        function crearGraficoActividad(actividadDiaria) {
+            if (activityChart) {
+                activityChart.destroy();
+            }
+
+            const ctx = document.getElementById('activityChart');
+            if (!ctx) return;
+
+            const labels = actividadDiaria.map(a => a.fecha);
+            const datos = actividadDiaria.map(a => a.minutos);
+
+            activityChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tiempo de actividad (minutos)',
+                        data: datos,
+                        borderColor: '#4A90E2',
+                        backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 5,
+                        pointHoverRadius: 7,
+                        pointBackgroundColor: '#4A90E2',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.parsed.y + ' minutos';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function (value) {
+                                    return value + 'm';
+                                }
+                            },
+                            grid: {
+                                color: '#f0f0f0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function crearGraficoModulos(modulosCompletados) {
+            if (modulesChart) {
+                modulesChart.destroy();
+            }
+
+            const ctx = document.getElementById('modulesChart');
+            if (!ctx) return;
+
+            if (modulosCompletados.length === 0) {
+                ctx.parentElement.innerHTML = '<p class="text-muted text-center mt-4">No hay datos de módulos completados</p>';
+                return;
+            }
+
+            const colores = ['#8B5CF6', '#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#06B6D4'];
+            const labels = modulosCompletados.map(m => m.modulo);
+            const datos = modulosCompletados.map(m => m.cantidad);
+
+            modulesChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: datos,
+                        backgroundColor: colores.slice(0, modulosCompletados.length),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function mostrarObservaciones(observaciones) {
+            const container = document.getElementById('observacionesContainer');
+
+            if (observaciones.length === 0) {
+                container.innerHTML = '<p class="text-muted">No hay observaciones registradas para este estudiante.</p>';
+                return;
+            }
+
+            container.innerHTML = observaciones.map(obs => `
+                        <div class="alert alert-secondary mb-2">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <p class="mb-1">${obs.contenido}</p>
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar"></i> ${new Date(obs.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+        }
+
+        function guardarObservacion() {
+            const contenido = document.getElementById('observacionTexto').value.trim();
+
+            if (!contenido) {
+                alert('Por favor escribe una observación');
+                return;
+            }
+
+            if (!currentEstudianteId) {
+                alert('Error: No se ha seleccionado un estudiante');
+                return;
+            }
+
+            fetch('@Url.Action("AgregarObservacion", "Tutor")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    idTutor: idTutor,
+                    idEstudiante: currentEstudianteId,
+                    contenido: contenido
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Observación guardada exitosamente');
+                        document.getElementById('observacionTexto').value = '';
+                        bootstrap.Modal.getInstance(document.getElementById('observacionModal')).hide();
+                        // Recargar observaciones
+                        cargarReporteEstudiante(currentEstudianteId);
+                    } else {
+                        alert('Error: ' + data.mensaje);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al guardar la observación');
+                });
+        }
+
+        function generarPDF() {
+            alert('Funcionalidad de generación de PDF en desarrollo');
+            // Aquí puedes implementar la generación de PDF usando una librería como jsPDF
+        }
+    </script>
+</body>
+</html>

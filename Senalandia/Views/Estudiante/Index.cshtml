@@ -1,0 +1,680 @@
+﻿@model Senalandia.Models.Roles.EstudianteDashboardViewModel
+
+@{
+    ViewData["Title"] = "Portal del Estudiante";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal del Estudiante - Señalandia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --primary-green: #2ECC71;
+            --primary-orange: #F39C12;
+            --bg-light: #F5F7FA;
+            --text-dark: #2C3E50;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* Header */
+        .navbar {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        .logo-icon {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .header-title {
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* Suggestion Card */
+        .suggestion-card {
+            background: linear-gradient(135deg, #D6EAF8 0%, #AED6F1 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: none;
+        }
+
+        .suggestion-title {
+            color: var(--primary-blue);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .suggestion-subtitle {
+            color: #5D6D7E;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .module-recommendation {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .module-recommendation h5 {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .module-recommendation p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .level-badge {
+            background: var(--primary-blue);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .progress-section {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .progress-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .progress-value {
+            color: var(--text-dark);
+            font-weight: 600;
+            float: right;
+        }
+
+        .progress {
+            height: 10px;
+            border-radius: 10px;
+            background: #E8F0F8;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-blue), #5DADE2);
+            border-radius: 10px;
+        }
+
+        .progress-message {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Module Cards */
+        .section-title {
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .module-card {
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .module-card.blue {
+            background: linear-gradient(135deg, #5DADE2 0%, #3498DB 100%);
+            color: white;
+        }
+
+        .module-card.green {
+            background: linear-gradient(135deg, #58D68D 0%, #2ECC71 100%);
+            color: white;
+        }
+
+        .module-card.orange {
+            background: linear-gradient(135deg, #F5B041 0%, #F39C12 100%);
+            color: white;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .module-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .module-description {
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        /* Rewards Section */
+        .rewards-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .rewards-title {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .rewards-subtitle {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .reward-item {
+            text-align: center;
+        }
+
+        .reward-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #F8F9FA;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.8rem;
+        }
+
+        .reward-icon.active {
+            background: linear-gradient(135deg, #FFD93D 0%, #FFC107 100%);
+        }
+
+        .reward-name {
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Letter Cards */
+        .letter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .letter-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .letter-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .letter-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .letter-instruction {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .form-check-label {
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Page Title */
+        .page-header {
+            margin: 40px 0 30px;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+
+        .btn-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .btn-info-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--text-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        @@media (max-width: 768px) {
+            .module-card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="bi bi-hand-index"></i>
+                    </div>
+                    <span>Señalandia</span>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="header-title">Portal del Estudiante</span>
+                    <button class="btn-info-icon">
+                        <i class="bi bi-info"></i>
+                    </button>
+                    <button class="btn-menu">
+                        <i class="bi bi-list"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard View -->
+    <div id="dashboardView" class="container py-4">
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-lg-8 mb-4">
+                <!-- Suggestion Card -->
+                @if (Model.Recomendacion != null)
+                {
+                    <div class="suggestion-card">
+                        <div class="suggestion-title">
+                            <i class="bi bi-stars"></i>
+                            Sugerencia para ti
+                        </div>
+                        <p class="suggestion-subtitle">
+                            Basado en tu progreso, te recomendamos el siguiente módulo:
+                        </p>
+                        <div class="module-recommendation">
+                            <h5>@Model.Recomendacion.NombreModulo</h5>
+                            <p>@Model.Recomendacion.Razonamiento</p>
+                            <button class="btn btn-primary mt-2" onclick="showModule(event, @Model.Recomendacion.IdModulo)">
+                                <i class="bi bi-play-circle"></i> Comenzar ahora
+                            </button>
+                        </div>
+                    </div>
+                }
+
+                <!-- Learning Modules -->
+                <h2 class="section-title">Módulos de Aprendizaje</h2>
+                <div class="row">
+                    @{
+                        var colores = new[] { "blue", "green", "orange", "purple", "red", "teal" };
+                        int colorIndex = 0;
+                    }
+                    @foreach (var modulo in Model.Modulos)
+                    {
+                        var colorClass = !string.IsNullOrEmpty(modulo.Color) ? modulo.Color : colores[colorIndex % colores.Length];
+                        colorIndex++;
+
+                        <div class="col-md-6">
+                            <a href="#" class="module-card @colorClass" onclick="showModule(event, @modulo.IdModulo)">
+                                <div class="module-icon">
+                                    <i class="@modulo.Icono"></i>
+                                </div>
+                                <h3 class="module-title">@modulo.Titulo</h3>
+                                <p class="module-description">@modulo.Descripcion</p>
+
+                                @if (modulo.PorcentajeCompletado > 0)
+                                {
+                                    <div class="mt-3">
+                                        <div class="d-flex justify-content-between mb-1">
+                                            <small>Progreso</small>
+                                            <small>@modulo.TarjetasCompletadas/@modulo.TotalTarjetas</small>
+                                        </div>
+                                        <div class="progress" style="height: 8px;">
+                                            <div class="progress-bar" style="width: @modulo.PorcentajeCompletado%"></div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mt-3">
+                                        <small class="text-muted">
+                                            <i class="bi bi-collection"></i> @modulo.TotalTarjetas tarjetas disponibles
+                                        </small>
+                                    </div>
+                                }
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-4">
+                <!-- Profile Card -->
+                <div class="profile-card mb-4">
+                    <img src="@Model.AvatarUrl" alt="@Model.NombreCompleto" class="profile-img">
+                    <div class="profile-name">@Model.NombreCompleto</div>
+                    <div class="level-badge">Nivel @Model.NivelActual - @Model.NombreNivel</div>
+
+                    <div class="progress-section">
+                        <div class="progress-label">
+                            Progreso Total
+                            <span class="progress-value">@Model.PuntosTotales/@Model.PuntosSiguienteNivel Puntos</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: @Model.PorcentajeProgreso%"></div>
+                        </div>
+                        <div class="progress-message">
+                            @if (Model.PuntosParaSiguienteNivel > 0)
+                            {
+                                <text>¡Sigue así! Estás a @Model.PuntosParaSiguienteNivel puntos de alcanzar el nivel @(Model.NivelActual + 1).</text>
+                            }
+                            else
+                            {
+                                <text>¡Felicidades! Has alcanzado el nivel máximo.</text>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="stats-row mt-3">
+                        <div class="stat-item">
+                            <i class="bi bi-check-circle"></i>
+                            <div>
+                                <div class="stat-value">@Model.LeccionesCompletadas</div>
+                                <div class="stat-label">Lecciones</div>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="bi bi-clock"></i>
+                            <div>
+                                <div class="stat-value">@Model.TiempoTotalMinutos</div>
+                                <div class="stat-label">Minutos</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rewards Card -->
+                <div class="rewards-card">
+                    <h3 class="rewards-title">Mis Recompensas</h3>
+                    <p class="rewards-subtitle">Tus medallas por logros alcanzados.</p>
+
+                    <div class="row g-3">
+                        @foreach (var medalla in Model.Medallas.Take(6))
+                        {
+                            <div class="col-4">
+                                <div class="reward-item">
+                                    <div class="reward-icon @(medalla.Obtenida ? "active" : "")">
+                                        @medalla.Icono
+                                    </div>
+                                    <div class="reward-name" title="@medalla.Descripcion">
+                                        @medalla.Nombre
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Module View -->
+    <div id="moduleView" class="container py-4" style="display: none;">
+        <div class="page-header">
+            <button class="btn btn-outline-primary mb-3" onclick="showDashboard()">
+                <i class="bi bi-arrow-left"></i> Volver al Dashboard
+            </button>
+            <h1 class="page-title" id="moduloTitulo">Módulo</h1>
+            <p class="page-subtitle" id="moduloDescripcion">Descripción del módulo</p>
+        </div>
+
+        <div class="row" id="tarjetasContainer">
+            <!-- Las tarjetas se cargarán dinámicamente -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const idEstudiante = @Model.IdEstudiante;
+        let currentModuloId = null;
+
+        function showModule(event, moduloId) {
+            event.preventDefault();
+            currentModuloId = moduloId;
+
+            document.getElementById('dashboardView').style.display = 'none';
+            document.getElementById('moduleView').style.display = 'block';
+
+            // Cargar tarjetas del módulo
+            cargarTarjetasModulo(moduloId);
+            window.scrollTo(0, 0);
+        }
+
+        function showDashboard() {
+            document.getElementById('moduleView').style.display = 'none';
+            document.getElementById('dashboardView').style.display = 'block';
+            currentModuloId = null;
+            window.scrollTo(0, 0);
+        }
+
+        function cargarTarjetasModulo(moduloId) {
+            fetch(`@Url.Action("ObtenerTarjetasModulo", "Estudiante")?idModulo=${moduloId}&idEstudiante=${idEstudiante}`)
+                .then(response => response.json())
+                .then(data => {
+                    // Actualizar título y descripción
+                    document.getElementById('moduloTitulo').textContent = data.modulo.titulo;
+                    document.getElementById('moduloDescripcion').textContent = data.modulo.descripcion;
+
+                    const container = document.getElementById('tarjetasContainer');
+
+                    if (data.tarjetas.length === 0) {
+                        container.innerHTML = `
+                                    <div class="col-12">
+                                        <div class="alert alert-info">
+                                            <i class="bi bi-info-circle"></i> Este módulo aún no tiene tarjetas disponibles.
+                                        </div>
+                                    </div>
+                                `;
+                        return;
+                    }
+
+                    container.innerHTML = data.tarjetas.map(tarjeta => `
+                                <div class="col-md-6 mb-4">
+                                    <div class="letter-card">
+                                        <h3 class="letter-title">${tarjeta.titulo}</h3>
+                                        ${tarjeta.imagenUrl ?
+                            `<img src="${tarjeta.imagenUrl}" alt="${tarjeta.titulo}" class="letter-image">` :
+                            `<div class="letter-image bg-secondary d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-image text-white" style="font-size: 3rem;"></i>
+                                            </div>`
+                        }
+                                        <p class="letter-instruction">${tarjeta.descripcion || ''}</p>
+                                        ${tarjeta.videoUrl ?
+                            `<div class="mb-3">
+                                                <a href="${tarjeta.videoUrl}" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                    <i class="bi bi-play-circle"></i> Ver Video
+                                                </a>
+                                            </div>` : ''
+                        }
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                    id="check${tarjeta.idTarjeta}"
+                                                    ${tarjeta.completada ? 'checked' : ''}
+                                                    onchange="marcarCompletada(${tarjeta.idTarjeta}, this.checked)">
+                                                <label class="form-check-label" for="check${tarjeta.idTarjeta}">
+                                                    Marcar como completado
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">
+                                                <i class="bi bi-star-fill text-warning"></i> ${tarjeta.puntos} puntos
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar las tarjetas del módulo');
+                });
+        }
+
+        function marcarCompletada(idTarjeta, completada) {
+            fetch('@Url.Action("CompletarTarjeta", "Estudiante")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    idEstudiante: idEstudiante,
+                    idTarjeta: idTarjeta,
+                    completada: completada
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (completada) {
+                            // Mostrar animación o mensaje de éxito
+                            mostrarMensajeExito('¡Tarjeta completada! Has ganado puntos.');
+                        }
+                    } else {
+                        alert('Error: ' + data.mensaje);
+                        // Revertir el checkbox si hubo error
+                        document.getElementById('check' + idTarjeta).checked = !completada;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al actualizar el progreso');
+                    // Revertir el checkbox si hubo error
+                    document.getElementById('check' + idTarjeta).checked = !completada;
+                });
+        }
+
+        function mostrarMensajeExito(mensaje) {
+            // Crear toast o alerta temporal
+            const toast = document.createElement('div');
+            toast.className = 'alert alert-success position-fixed top-0 start-50 translate-middle-x mt-3';
+            toast.style.zIndex = '9999';
+            toast.innerHTML = `<i class="bi bi-check-circle"></i> ${mensaje}`;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+                // Recargar la página para actualizar los puntos
+                location.reload();
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
